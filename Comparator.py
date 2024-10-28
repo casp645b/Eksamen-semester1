@@ -3,7 +3,7 @@ from dataclasses import dataclass
 @dataclass
 class Comparator:
     """
-        Dataclass that contains 2 integers to compare
+        Dataclass that contains the position of 2 integers to compare
     """
     channel1: int
     channel2: int
@@ -11,7 +11,8 @@ class Comparator:
 
 def makeComparator(i: int, j: int) -> Comparator:
     """
-        Creates a new instance of comparator
+        Creates a new instance of comparator.
+        i and j can not be the same
     """
     return Comparator(i, j)
 
@@ -41,8 +42,7 @@ def isStandard(c: Comparator) -> bool:
         >>>isStandard(makeComparator(1,0))
         false
     """
-    return (c.channel1 == minChannel(c) and c.channel2 == maxChannel(c)
-            and c.channel1 != c.channel2)
+    return (c.channel1 == minChannel(c) and c.channel2 == maxChannel(c))
 
 
 def apply(c: Comparator, w: list[int]) -> list[int]:
@@ -64,15 +64,15 @@ def apply(c: Comparator, w: list[int]) -> list[int]:
 
 def allComparators(n: int) -> list[Comparator]:
     """
-        Returns a list with all possible comparators
+        Returns a list with all possible comparators with different channels
         >>>allComparators(2)
-        [comparator(channel1=0, channel2=0), comparator(channel1=0, channel2=1),
-        comparator(channel1=1, channel2=0), comparator(channel1=1, channel2=1)]
+        [comparator(channel1=0, channel2=1), comparator(channel1=1, channel2=0)]
     """
-    v = list(range(n**2))
+    v = []
     for i in range(n):
         for j in range(n):
-            v[i*n+j] = makeComparator(i,j)
+            if (i != j):
+                v.append(makeComparator(i,j))
     return v
 
 
