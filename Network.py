@@ -2,11 +2,11 @@ from dataclasses import dataclass
 import Comparator
 
 @dataclass
-class network:
+class Network:
     """
         Do nothing
     """
 
 
-def test(i: int, j: int) -> Comparator.comparator:
+def empty_network() -> Network:
     return Comparator.makeComparator(i, j)

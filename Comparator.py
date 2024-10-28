@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 
 @dataclass
-class comparator:
+class Comparator:
     """
         Dataclass that contains 2 integers to compare
     """
@@ -9,14 +9,14 @@ class comparator:
     channel2: int
 
 
-def makeComparator(i: int, j: int) -> comparator:
+def makeComparator(i: int, j: int) -> Comparator:
     """
         Creates a new instance of comparator
     """
-    return comparator(i, j)
+    return Comparator(i, j)
 
 
-def minChannel(c: comparator) -> int:
+def minChannel(c: Comparator) -> int:
     """        
         Returns the channel the lowest value is to be put by the comparator
         >>>minChannel(makeComparator(1,0))
@@ -25,7 +25,7 @@ def minChannel(c: comparator) -> int:
     return c.channel1 if c.channel1 < c.channel2 else c.channel2
 
 
-def maxChannel(c: comparator) -> int:
+def maxChannel(c: Comparator) -> int:
     """        
         Returns the channel the highest value is to be put by the comparator
         >>>maxChannel(makeComparator(1,0))
@@ -34,7 +34,7 @@ def maxChannel(c: comparator) -> int:
     return c.channel1 if c.channel1 > c.channel2 else c.channel2
 
 
-def isStandard(c: comparator) -> bool:
+def isStandard(c: Comparator) -> bool:
     """
         Returns wether or not the comparator is standard.
         I.e. if it outputs the smallest value on the smallest channel
@@ -45,7 +45,7 @@ def isStandard(c: comparator) -> bool:
             and c.channel1 != c.channel2)
 
 
-def apply(c: comparator, w: list[int]) -> list[int]:
+def apply(c: Comparator, w: list[int]) -> list[int]:
     """
         Applies a comparator on the list w
         I.e. compares two values on w as specified in the comparator and sorts them
@@ -62,7 +62,7 @@ def apply(c: comparator, w: list[int]) -> list[int]:
         return w
 
 
-def allComparators(n: int) -> list[comparator]:
+def allComparators(n: int) -> list[Comparator]:
     """
         Returns a list with all possible comparators
         >>>allComparators(2)
@@ -76,7 +76,7 @@ def allComparators(n: int) -> list[comparator]:
     return v
 
 
-def stdComparators(n: int) -> list[comparator]:
+def stdComparators(n: int) -> list[Comparator]:
     """
         Returns a list with all standard comparator
     """
