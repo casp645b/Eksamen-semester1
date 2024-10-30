@@ -51,3 +51,10 @@ def apply(net: Network, w: list[int]) -> list[int]:
         Applies the comparators in a network to the list w
     """
     return list(functools.reduce(lambda x, y: Comparator.apply(y, x), net.comparators, w))
+
+
+def outputs(net: Network, w: list[list[int]]) -> list[list[int]]:
+    """
+        Returns a list of unique lists as a result of net being applied to the lists in w
+    """
+    return list(tuple(map(lambda x: apply(net, x), w)))
