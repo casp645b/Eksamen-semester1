@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
 import Comparator
+import functools
 
 @dataclass
 class Network:
@@ -49,8 +50,4 @@ def apply(net: Network, w: list[int]) -> list[int]:
     """
         Applies the comparators in a network to the list w
     """
-    #Kig på kommentar. Kan nok gøres funktionelt
-    #return list(map(lambda x: Comparator.apply(x, w), net.comparators))
-    for i in range(size(net)):
-        w = Comparator.apply(net.comparators[i], w)
-    return w
+    return list(functools.reduce(lambda x, y: Comparator.apply(y, x), net.comparators, w))
