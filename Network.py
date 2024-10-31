@@ -19,8 +19,8 @@ def append(c: Comparator.Comparator, net: Network) -> Network:
     """
         Adds a comparator to the end of the network
     """
-    tempNet = net.comparators.append(c)
-    return tempNet
+    net.comparators.append(c)
+    return net
 
 def size(net: Network) -> int:
     """
