@@ -12,7 +12,11 @@ class Comparator:
 def makeComparator(i: int, j: int) -> Comparator:
     """
         Creates a new instance of comparator.
+        
         i and j can not be the same
+
+        >>>makeComparator(0, 1)
+        Comparator(channel1=0, channel2=1)
     """
     return Comparator(i, j)
 
@@ -20,6 +24,7 @@ def makeComparator(i: int, j: int) -> Comparator:
 def minChannel(c: Comparator) -> int:
     """        
         Returns the channel the lowest value is to be put by the comparator
+        
         >>>minChannel(makeComparator(1,0))
         0
     """
@@ -29,6 +34,7 @@ def minChannel(c: Comparator) -> int:
 def maxChannel(c: Comparator) -> int:
     """        
         Returns the channel the highest value is to be put by the comparator
+        
         >>>maxChannel(makeComparator(1,0))
         1
     """
@@ -37,8 +43,9 @@ def maxChannel(c: Comparator) -> int:
 
 def isStandard(c: Comparator) -> bool:
     """
-        Returns wether or not the comparator is standard.
+        Returns whether or not the comparator is standard.
         I.e. if it outputs the smallest value on the smallest channel
+        
         >>>isStandard(makeComparator(1,0))
         false
     """
@@ -49,6 +56,9 @@ def apply(c: Comparator, w: list[int]) -> list[int]:
     """
         Applies a comparator on the list w
         I.e. compares two values on w as specified in the comparator and sorts them
+
+        maxChannel of c has to be less than the length of w
+        
         >>>apply(makeComparator(1,0), [2,1,3])
         [1,2,3]
     """
@@ -65,6 +75,8 @@ def apply(c: Comparator, w: list[int]) -> list[int]:
 def allComparators(n: int) -> list[Comparator]:
     """
         Returns a list with all possible comparators with different channels
+        for n total channels
+        
         >>>allComparators(2)
         [comparator(channel1=0, channel2=1), comparator(channel1=1, channel2=0)]
     """
@@ -78,6 +90,25 @@ def allComparators(n: int) -> list[Comparator]:
 
 def stdComparators(n: int) -> list[Comparator]:
     """
-        Returns a list with all standard comparator
+        Returns a list with all standard comparator for n total channels
+
+        >>>stdComparators(2)
+        [comparator(channel1=0, channel2=1)]
     """
     return list(filter(isStandard, allComparators(n)))
+
+
+def toProgram(c: Comparator, var: str, aux: str) -> list[str]:
+    """
+        Returns a sequence of instructions to simulate the comparator in words
+
+        Does not use the variable aux
+
+        >>>toProgram(makeComparator(0, 1), "a", "b")
+        ['If the value on channel 0, on the list a,
+        is greater than the value on channel 1, swap the values.']
+    """
+    return ["If the value on channel " + str(minChannel(c))
+            + ", on the list " + var
+            + ", is greater than the value on channel "
+            + str(maxChannel(c)) + ", swap the values."]
