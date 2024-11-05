@@ -74,8 +74,9 @@ def apply(c: Comparator, w: list[int]) -> list[int]:
 
 def allComparators(n: int) -> list[Comparator]:
     """
-        Returns a list with all possible comparators with different channels
-        for n total channels
+        Returns a list of all possible comparators on channels
+
+        n has to be positive
         
         >>> allComparators(2)
         [Comparator(channel1=0, channel2=1), Comparator(channel1=1, channel2=0)]
