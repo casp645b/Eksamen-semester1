@@ -93,6 +93,8 @@ def stdComparators(n: int) -> list[Comparator]:
     """
         Returns a list with all standard comparator for n total channels
 
+        n has to be positive
+
         >>> stdComparators(2)
         [Comparator(channel1=0, channel2=1)]
     """
