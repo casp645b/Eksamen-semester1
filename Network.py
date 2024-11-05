@@ -65,8 +65,7 @@ def apply(net: Network, w: list[int]) -> list[int]:
     """
         Applies the comparators in a network to the list w
 
-        maxChannel of net has to be less than the length of w
-
+         the length of w has to greater than maxChannel of net
         >>> apply(append(Comparator.makeComparator(0, 1), emptyNetwork()), [3, 2, 1])
         [2, 3, 1]
     """
@@ -79,7 +78,7 @@ def outputs(net: Network, w: list[list[int]]) -> list[list[int]]:
         Returns a list of unique lists (i.e. removes duplicates)
         as a result of net being applied to the lists in w
 
-        maxChannel of net has to be less than the length of each element of w
+        the length of each element of w must be greater than maxChannel of net
 
         >>> outputs(append(Comparator.makeComparator(0, 1),
         ... emptyNetwork()), [[3, 2, 1], [2, 3, 1], [2, 1, 3]])
@@ -105,7 +104,7 @@ def allOutputs(net: Network, n: int) -> list[list[int]]:
         Returns the output of the outputs function
         for all binary permutations of a list with length n
 
-        maxChannel of net has to be less than n
+        n has to be greater than maxChannel of net
 
         >>> allOutputs(append(Comparator.makeComparator(0, 1), emptyNetwork()), 3)
         [[0, 0, 0], [0, 0, 1], [0, 1, 0], [0, 1, 1], [1, 1, 0], [1, 1, 1]]
@@ -134,8 +133,9 @@ def isSorting(net: Network, size: int) -> bool:
         Check whether or not a given network
         will correctly sort all lists of length size
 
-        The maximum channel the network refers to
-        must be less than the size for this function to be used
+        
+        size must be greather then The maximum channel the network refers to 
+        for this function to be used
 
         >>> isSorting(append(Comparator.makeComparator(0, 1), emptyNetwork()), 3)
         False
