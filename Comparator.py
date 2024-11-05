@@ -13,7 +13,7 @@ def makeComparator(i: int, j: int) -> Comparator:
     """
         Creates a new instance of comparator.
         
-        i and j can not be the same
+        i and j both have to be non-negativ and can not be the same
 
         >>> makeComparator(0, 1)
         Comparator(channel1=0, channel2=1)
