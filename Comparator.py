@@ -13,7 +13,7 @@ def makeComparator(i: int, j: int) -> Comparator:
     """
         Creates a new instance of comparator.
         
-        i and j can not be the same
+        i and j both have to be non-negativ and can not be the same
 
         >>> makeComparator(0, 1)
         Comparator(channel1=0, channel2=1)
@@ -74,8 +74,9 @@ def apply(c: Comparator, w: list[int]) -> list[int]:
 
 def allComparators(n: int) -> list[Comparator]:
     """
-        Returns a list with all possible comparators with different channels
-        for n total channels
+        Returns a list of all possible comparators on n channels
+
+        n has to be positive
         
         >>> allComparators(2)
         [Comparator(channel1=0, channel2=1), Comparator(channel1=1, channel2=0)]
@@ -91,6 +92,8 @@ def allComparators(n: int) -> list[Comparator]:
 def stdComparators(n: int) -> list[Comparator]:
     """
         Returns a list with all standard comparator for n total channels
+
+        n has to be positive
 
         >>> stdComparators(2)
         [Comparator(channel1=0, channel2=1)]
