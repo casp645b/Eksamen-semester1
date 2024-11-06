@@ -49,7 +49,7 @@ def isStandard(c: Comparator) -> bool:
         >>> isStandard(makeComparator(1,0))
         False
     """
-    return (c.channel1 == minChannel(c) and c.channel2 == maxChannel(c))
+    return c.channel1 == minChannel(c)
 
 
 def apply(c: Comparator, w: list[int]) -> list[int]:
