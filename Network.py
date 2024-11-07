@@ -85,8 +85,8 @@ def outputs(net: Network, w: list[list[int]]) -> list[list[int]]:
         [[2, 3, 1], [1, 2, 3]]
     """
     v = list(map(lambda x: apply(net, x), w))
-    return list(map(lambda x: v[x], filter(lambda x: not member(v[x], v[x+1:]),
-                                           range(len(v)))))
+    index=list(filter(lambda x: not member(v[x], v[x+1:]), range(len(v))))
+    return list(map(lambda x: v[x], index))
 
 def member(x: any, v: list) -> bool:
     """
