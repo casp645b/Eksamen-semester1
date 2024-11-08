@@ -13,7 +13,7 @@ def makeComparator(i: int, j: int) -> Comparator:
     """
         Creates a new instance of comparator.
         
-        i and j both have to be non-negativ and can not be the same
+        i and j both must be non-negative and can not be the same
 
         >>> makeComparator(0, 1)
         Comparator(channel1=0, channel2=1)
@@ -57,7 +57,7 @@ def apply(c: Comparator, w: list[int]) -> list[int]:
         Applies a comparator on the list w
         I.e. compares two values on w as specified in the comparator and sorts them
 
-        maxChannel of c has to be less than the length of w
+        maxChannel of c must be less than the length of w
         
         >>> apply(makeComparator(1,0), [2, 1, 3])
         [1, 2, 3]
@@ -76,7 +76,7 @@ def allComparators(n: int) -> list[Comparator]:
     """
         Returns a list of all possible comparators on n channels
 
-        n has to be positive
+        n must be positive
         
         >>> allComparators(2)
         [Comparator(channel1=0, channel2=1), Comparator(channel1=1, channel2=0)]
@@ -93,7 +93,7 @@ def stdComparators(n: int) -> list[Comparator]:
     """
         Returns a list with all standard comparator for n total channels
 
-        n has to be positive
+        n must be positive
 
         >>> stdComparators(2)
         [Comparator(channel1=0, channel2=1)]
@@ -103,7 +103,7 @@ def stdComparators(n: int) -> list[Comparator]:
 
 def toProgram(c: Comparator, var: str, aux: str) -> list[str]:
     """
-        Returns a list of strings that, if insertet in  Python shell,
+        Returns a list of strings that, if inserted in  Python shell,
         sorts a list with name var based on instructions in comparator
 
         Does not use the variable aux
