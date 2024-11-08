@@ -130,8 +130,10 @@ def baseTenToBinary(m: int, n: int) -> list[int]:
 
 def isSorting(net: Network, size: int) -> bool:
     """
-        Check whether or not a given network
-        will correctly sort all lists of length size
+        Check whether or not a the comparatornetwork net 
+        is a sorting network to size inputs,
+        i.e check whether or not net will correctly sort all lists of length size
+        
 
         
         size must be greather then The maximum channel the network refers to 
