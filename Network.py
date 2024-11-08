@@ -31,7 +31,7 @@ def append(c: Comparator.Comparator, net: Network) -> Network:
 
 def size(net: Network) -> int:
     """
-        Returns the amount of comparators in the network
+        Returns the number of comparators in the network
 
         >>> size(append(Comparator.makeComparator(0, 1), emptyNetwork()))
         1
@@ -130,13 +130,13 @@ def baseTenToBinary(m: int, n: int) -> list[int]:
 
 def isSorting(net: Network, size: int) -> bool:
     """
-        Check whether or not a the comparatornetwork net 
+        Check whether or not the comparator network net 
         is a sorting network to size inputs,
-        i.e check whether or not net will correctly sort all lists of length size
+        i.e. check whether or not net will correctly sort all lists of length size
         
 
         
-        size must be greather then The maximum channel the network refers to 
+        size must be greater than the maximum channel the network refers to 
         for this function to be used
 
         >>> isSorting(append(Comparator.makeComparator(0, 1), emptyNetwork()), 3)
@@ -150,7 +150,7 @@ def isSorting(net: Network, size: int) -> bool:
 
 def toProgram(net: Network, var: str, aux: str) -> list[str]:
     """
-        Returns a list of strings that, if insertet in  Python shell,
+        Returns a list of strings that, if inserted in  Python shell,
         sorts a list with name var based on instructions in network
 
         Does not use the variable aux
