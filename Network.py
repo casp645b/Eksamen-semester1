@@ -31,7 +31,7 @@ def append(c: Comparator.Comparator, net: Network) -> Network:
 
 def size(net: Network) -> int:
     """
-        Returns the amount of comparators in the network
+        Returns the number of comparators in the network
 
         >>> size(append(Comparator.makeComparator(0, 1), emptyNetwork()))
         1
@@ -65,8 +65,7 @@ def apply(net: Network, w: list[int]) -> list[int]:
     """
         Applies the comparators in a network to the list w
 
-        maxChannel of net has to be less than the length of w
-
+         the length of w has to greater than maxChannel of net
         >>> apply(append(Comparator.makeComparator(0, 1), emptyNetwork()), [3, 2, 1])
         [2, 3, 1]
     """
@@ -79,15 +78,15 @@ def outputs(net: Network, w: list[list[int]]) -> list[list[int]]:
         Returns a list of unique lists (i.e. removes duplicates)
         as a result of net being applied to the lists in w
 
-        maxChannel of net has to be less than the length of each element of w
+        the length of each element of w must be greater than maxChannel of net
 
         >>> outputs(append(Comparator.makeComparator(0, 1),
         ... emptyNetwork()), [[3, 2, 1], [2, 3, 1], [2, 1, 3]])
         [[2, 3, 1], [1, 2, 3]]
     """
     v = list(map(lambda x: apply(net, x), w))
-    return list(map(lambda x: v[x], filter(lambda x: not member(v[x], v[x+1:]),
-                                           range(len(v)))))
+    index=list(filter(lambda x: not member(v[x], v[x+1:]), range(len(v))))
+    return list(map(lambda x: v[x], index))
 
 def member(x: any, v: list) -> bool:
     """
@@ -105,7 +104,7 @@ def allOutputs(net: Network, n: int) -> list[list[int]]:
         Returns the output of the outputs function
         for all binary permutations of a list with length n
 
-        maxChannel of net has to be less than n
+        n has to be greater than maxChannel of net
 
         >>> allOutputs(append(Comparator.makeComparator(0, 1), emptyNetwork()), 3)
         [[0, 0, 0], [0, 0, 1], [0, 1, 0], [0, 1, 1], [1, 1, 0], [1, 1, 1]]
@@ -131,11 +130,14 @@ def baseTenToBinary(m: int, n: int) -> list[int]:
 
 def isSorting(net: Network, size: int) -> bool:
     """
-        Check whether or not a given network
-        will correctly sort all lists of length size
+        Check whether or not the comparator network net 
+        is a sorting network to size inputs,
+        i.e. check whether or not net will correctly sort all lists of length size
+        
 
-        The maximum channel the network refers to
-        must be less than the size for this function to be used
+        
+        size must be greater than the maximum channel the network refers to 
+        for this function to be used
 
         >>> isSorting(append(Comparator.makeComparator(0, 1), emptyNetwork()), 3)
         False
@@ -148,7 +150,7 @@ def isSorting(net: Network, size: int) -> bool:
 
 def toProgram(net: Network, var: str, aux: str) -> list[str]:
     """
-        Returns a list of strings that, if insertet in  Python shell,
+        Returns a list of strings that, if inserted in  Python shell,
         sorts a list with name var based on instructions in network
 
         Does not use the variable aux
