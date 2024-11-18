@@ -9,47 +9,47 @@ class Comparator:
     channel2: int
 
 
-def makeComparator(i: int, j: int) -> Comparator:
+def make_comparator(i: int, j: int) -> Comparator:
     """
         Creates a new instance of comparator.
         
         i and j both must be non-negative and can not be the same
 
-        >>> makeComparator(0, 1)
+        >>> make_comparator(0, 1)
         Comparator(channel1=0, channel2=1)
     """
     return Comparator(i, j)
 
 
-def minChannel(c: Comparator) -> int:
+def min_channel(c: Comparator) -> int:
     """        
         Returns the channel the lowest value is to be put by the comparator
         
-        >>> minChannel(makeComparator(1,0))
+        >>> min_channel(make_comparator(1,0))
         0
     """
     return c.channel1 if c.channel1 < c.channel2 else c.channel2
 
 
-def maxChannel(c: Comparator) -> int:
+def max_channel(c: Comparator) -> int:
     """        
         Returns the channel the highest value is to be put by the comparator
         
-        >>> maxChannel(makeComparator(1,0))
+        >>> max_channel(make_comparator(1,0))
         1
     """
     return c.channel1 if c.channel1 > c.channel2 else c.channel2
 
 
-def isStandard(c: Comparator) -> bool:
+def is_standard(c: Comparator) -> bool:
     """
         Returns whether or not the comparator is standard.
         I.e. if it outputs the smallest value on the smallest channel
         
-        >>> isStandard(makeComparator(1,0))
+        >>> is_standard(make_comparator(1,0))
         False
     """
-    return c.channel1 == minChannel(c)
+    return c.channel1 == min_channel(c)
 
 
 def apply(c: Comparator, w: list[int]) -> list[int]:
@@ -59,69 +59,69 @@ def apply(c: Comparator, w: list[int]) -> list[int]:
 
         maxChannel of c must be less than the length of w
         
-        >>> apply(makeComparator(1,0), [2, 1, 3])
+        >>> apply(make_comparator(1,0), [2, 1, 3])
         [1, 2, 3]
     """
     v = w.copy()
     if v[c.channel1] < v[c.channel2]:
-        if not isStandard(c):
+        if not is_standard(c):
             v[c.channel1], v[c.channel2] = v[c.channel2], v[c.channel1]
         return v
     else:
-        if isStandard(c):
+        if is_standard(c):
             v[c.channel1], v[c.channel2] = v[c.channel2], v[c.channel1]
         return v
 
 
-def allComparators(n: int) -> list[Comparator]:
+def all_comparators(n: int) -> list[Comparator]:
     """
         Returns a list of all possible comparators on n channels
 
         n must be positive
         
-        >>> allComparators(2)
+        >>> all_comparators(2)
         [Comparator(channel1=0, channel2=1), Comparator(channel1=1, channel2=0)]
     """
     v = []
     for i in range(n):
         for j in range(n):
             if (i != j):
-                v.append(makeComparator(i,j))
+                v.append(make_comparator(i,j))
     return v
 
 
-def stdComparators(n: int) -> list[Comparator]:
+def std_comparators(n: int) -> list[Comparator]:
     """
         Returns a list with all standard comparator for n total channels
 
         n must be positive
 
-        >>> stdComparators(2)
+        >>> std_comparators(2)
         [Comparator(channel1=0, channel2=1)]
     """
-    return list(filter(isStandard, allComparators(n)))
+    return list(filter(is_standard, all_comparators(n)))
 
 
-def toProgram(c: Comparator, var: str, aux: str) -> list[str]:
+def to_program(c: Comparator, var: str, aux: str) -> list[str]:
     """
         Returns a list of strings that, if inserted in  Python shell,
         sorts a list with name var based on instructions in comparator
 
         Does not use the variable aux
 
-        >>> toProgram(makeComparator(0, 1), "a", "b")
-        ['c = makeComparator(0, 1)', 'i = 0', 'j = 1', 'if a[i] < a[j]:', \
-'  if not isStandard(c):', '    a[i], a[j] = a[j], a[i]', 'else:', \
-'  if isStandard(c):', '    a[i], a[j] = a[j], a[i]']
+        >>> to_program(make_comparator(0, 1), "a", "b")
+        ['c = make_comparator(0, 1)', 'i = 0', 'j = 1', 'if a[i] < a[j]:', \
+'  if not is_standard(c):', '    a[i], a[j] = a[j], a[i]', 'else:', \
+'  if is_standard(c):', '    a[i], a[j] = a[j], a[i]']
     """
-    return [f"c = makeComparator({c.channel1}, {c.channel2})",
+    return [f"c = make_comparator({c.channel1}, {c.channel2})",
             f"i = {c.channel1}",
             f"j = {c.channel2}",
             f"if {var}[i] < {var}[j]:",
-            f"  if not isStandard(c):",
+            f"  if not is_standard(c):",
             f"    {var}[i], {var}[j] = {var}[j], {var}[i]",
             f"else:",
-            f"  if isStandard(c):",
+            f"  if is_standard(c):",
             f"    {var}[i], {var}[j] = {var}[j], {var}[i]"]
 
 
