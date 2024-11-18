@@ -19,6 +19,7 @@ def emptyNetwork() -> Network:
     """
     return Network([])
 
+
 def append(c: Comparator.Comparator, net: Network) -> Network:
     """
         Adds a comparator to the end of the network
@@ -26,8 +27,9 @@ def append(c: Comparator.Comparator, net: Network) -> Network:
         >>> append(Comparator.makeComparator(0, 1), emptyNetwork())
         Network(comparators=[Comparator(channel1=0, channel2=1)])
     """
-    net.comparators.append(c)
-    return net
+    newNet = Network(net.comparators.copy())
+    newNet.comparators.append(c)
+    return newNet
 
 def size(net: Network) -> int:
     """

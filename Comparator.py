@@ -62,14 +62,15 @@ def apply(c: Comparator, w: list[int]) -> list[int]:
         >>> apply(makeComparator(1,0), [2, 1, 3])
         [1, 2, 3]
     """
-    if w[c.channel1] < w[c.channel2]:
+    v = w.copy()
+    if v[c.channel1] < v[c.channel2]:
         if not isStandard(c):
-            w[c.channel1], w[c.channel2] = w[c.channel2], w[c.channel1]
-        return w
+            v[c.channel1], v[c.channel2] = v[c.channel2], v[c.channel1]
+        return v
     else:
         if isStandard(c):
-            w[c.channel1], w[c.channel2] = w[c.channel2], w[c.channel1]
-        return w
+            v[c.channel1], v[c.channel2] = v[c.channel2], v[c.channel1]
+        return v
 
 
 def allComparators(n: int) -> list[Comparator]:
