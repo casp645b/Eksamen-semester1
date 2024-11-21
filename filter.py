@@ -58,6 +58,8 @@ def is_redundant(c: comparator.Comparator, f: Filter) -> bool:
         Returns false if not
         i.e. returns true if the length of the binary outputs of f doesn't change if c is applied to it
 
+        max_channel of the comparator c must be less than the length of each element in f.binaryOut
+
         >>> filt = make_empty_filter(3)
         >>> comp = comparator.make_comparator(0,1)
         >>> is_redundant(comp, filt)
