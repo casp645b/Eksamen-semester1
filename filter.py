@@ -5,14 +5,14 @@ import network
 @dataclass
 class Filter:
     """
-        Class that contains a network of comparators as well as all the binary outputs of said network
+        Dataclass that contains a network of comparators as well as all the binary outputs of this network
     """
     netw: network.Network
     binaryOut: list[list[int]]
 
 def make_empty_filter(n: int) -> Filter:
     """
-        Creates a new instance of Filter where the network is empty and the binary outputs are of length n
+        Creates a new instance of Filter where the network is empty and the binary outputs are of the length n
         
         n must be greater than 1
 
@@ -57,6 +57,8 @@ def is_redundant(c: comparator.Comparator, f: Filter) -> bool:
         Returns true if the comparator c is redundant according to f
         Returns false if not
         i.e. returns true if the length of the binary outputs of f doesn't change if c is applied to it
+
+        max_channel of the comparator c must be less than the length of each element in f.binaryOut
 
         >>> filt = make_empty_filter(3)
         >>> comp = comparator.make_comparator(0,1)
