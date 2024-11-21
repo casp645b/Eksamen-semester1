@@ -110,19 +110,17 @@ def to_program(c: Comparator, var: str, aux: str) -> list[str]:
         Does not use the variable aux
 
         >>> to_program(make_comparator(0, 1), "a", "b")
-        ['c = make_comparator(0, 1)', 'i = 0', 'j = 1', 'if a[i] < a[j]:', \
-'  if not is_standard(c):', '    a[i], a[j] = a[j], a[i]', 'else:', \
-'  if is_standard(c):', '    a[i], a[j] = a[j], a[i]']
+        ['i = 0', 'j = 1', 'if a[i] > a[j]:', '  a[i], a[j] = a[j], a[i]', \
+'else:', '  a[i], a[j] = a[j], a[i]']
     """
-    return [f"c = make_comparator({c.channel1}, {c.channel2})",
-            f"i = {c.channel1}",
-            f"j = {c.channel2}",
-            f"if {var}[i] < {var}[j]:",
-            f"  if not is_standard(c):",
-            f"    {var}[i], {var}[j] = {var}[j], {var}[i]",
+    return [f"i = {min_channel(c)}",
+            f"j = {max_channel(c)}",
+            f"if {var}[i] > {var}[j]:",
+            f"  {var}[i], {var}[j] = {var}[j], {var}[i]",
             f"else:",
-            f"  if is_standard(c):",
-            f"    {var}[i], {var}[j] = {var}[j], {var}[i]"]
+            f"  {var}[i], {var}[j] = {var}[j], {var}[i]"]
+
+    
 
 
 if __name__ == "__main__":
