@@ -6,6 +6,10 @@ import prune
 def network_finder(n: int) -> network.Network:
     """
         Finds a sortingnetwork for n channels/inputs
+
+        >>> netw = network_finder(4)
+        >>> network.is_sorting(netw, 4)
+        True
     """
     
     filters = [filt.make_empty_filter(n)]
@@ -30,11 +34,25 @@ def network_finder(n: int) -> network.Network:
     
     
     
+def interface() -> None:
+    """
+        Prints the implementation of a found sortingnetwork that sorts a list v
+        with length specified by the input from the user
+    """
+    size = int(input("How many inputs should the network sort? "))
+
+    sortingNetwork = network_finder(size)
+    print(sortingNetwork)
+    print("The found sortingnetwork on " + str(size) + " channels consists of " +
+          str(network.size(sortingNetwork)) + " comparators.")
+    toWrite = network.to_program(sortingNetwork, "v", "")
+    print("The Python implementation for sorting a list v of size " + str(size) + " is:")
+    for i in toWrite:
+        print(i)
 
 
-size = int(input("What should the size of the network be?"))
 
-sortingNetwork = network_finder(size)
-print(sortingNetwork)
+if __name__ == "__main__":
+    interface()
 
-print(network.to_program(sortingNetwork, "v", ""))
+

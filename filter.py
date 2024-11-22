@@ -5,14 +5,16 @@ import network
 @dataclass
 class Filter:
     """
-        Dataclass that contains a network of comparators as well as all the binary outputs of this network
+        Dataclass that contains a network of comparators
+        as well as all the binary outputs of this network
     """
     netw: network.Network
     binaryOut: list[list[int]]
 
 def make_empty_filter(n: int) -> Filter:
     """
-        Creates a new instance of Filter where the network is empty and the binary outputs are of the length n
+        Creates a new instance of Filter
+        where the network is empty and the binary outputs are of the length n
         
         n must be greater than 1
 
@@ -20,7 +22,8 @@ def make_empty_filter(n: int) -> Filter:
         Filter(netw=Network(comparators=[]), binaryOut=[[0, 0, 0], [0, 0, 1], \
 [0, 1, 0], [0, 1, 1], [1, 0, 0], [1, 0, 1], [1, 1, 0], [1, 1, 1]])
     """
-    return Filter(network.empty_network(), network.all_outputs(network.empty_network(), n))
+    return Filter(network.empty_network(),
+                  network.all_outputs(network.empty_network(), n))
 
 def net(f: Filter) -> network.Network:
     """
@@ -50,15 +53,18 @@ def temp_net(c: comparator.Comparator) -> network.Network:
         >>> temp_net(comparator.make_comparator(0,1))
         Network(comparators=[Comparator(channel1=0, channel2=1)])
     """
-    return network.append(c, network.empty_network())
+    return network.Network([c])
+    
 
 def is_redundant(c: comparator.Comparator, f: Filter) -> bool:
     """
         Returns true if the comparator c is redundant according to f
         Returns false if not
-        i.e. returns true if the length of the binary outputs of f doesn't change if c is applied to it
+        i.e. returns true if the length of the binary outputs of f
+        doesn't change if c is applied to it
 
-        max_channel of the comparator c must be less than the length of each element in f.binaryOut
+        max_channel of the comparator c
+        must be less than the length of each element in f.binaryOut
 
         >>> filt = make_empty_filter(3)
         >>> comp = comparator.make_comparator(0,1)
@@ -74,23 +80,28 @@ def is_redundant(c: comparator.Comparator, f: Filter) -> bool:
 def add(c: comparator.Comparator, f: Filter) -> Filter:
     """
         Updates filter f by adding comparator c
-        i.e. adds a comparator c to the network in f and updates binaryOut in f to reflect this change
+        i.e. adds a comparator c to the network in f
+        and updates binaryOut in f to reflect this change
 
-        max_channel of the comparator c must be less than the length of each element in f.binaryOut
+        max_channel of the comparator c
+        must be less than the length of each element in f.binaryOut
 
         >>> filt = make_empty_filter(3)
         >>> comp = comparator.make_comparator(0,1)
         >>> add(comp, filt)
-        Filter(netw=Network(comparators=[Comparator(channel1=0, channel2=1)]), binaryOut=[[0, 0, 0], [0, 0, 1], [0, 1, 0], [0, 1, 1], [1, 1, 0], [1, 1, 1]])
+        Filter(netw=Network(comparators=[Comparator(channel1=0, channel2=1)]), \
+binaryOut=[[0, 0, 0], [0, 0, 1], [0, 1, 0], [0, 1, 1], [1, 1, 0], [1, 1, 1]])
     """
-    newFilt = Filter(network.append(c, net(f)), network.outputs(temp_net(c), out(f)))
+    newFilt = Filter(network.append(c, net(f)),
+                     network.outputs(temp_net(c), out(f)))
     return newFilt
 
 
 def is_sorting(f: Filter) -> bool:
     """
         Returns true if the network sorts each binary input and false if not
-        Uses the fact that there are n + 1 more lists in a sorted list of lists with n being the amount of element in the inner lists
+        Uses the fact that there are n + 1 more lists in a sorted list of lists
+        with n being the amount of element in the inner lists
 
         >>> filt = make_empty_filter(3)
         >>> comp = comparator.make_comparator(0,1)
