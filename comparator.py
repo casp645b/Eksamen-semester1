@@ -63,14 +63,11 @@ def apply(c: Comparator, w: list[int]) -> list[int]:
         [1, 2, 3]
     """
     v = w.copy()
-    if v[c.channel1] < v[c.channel2]:
-        if not is_standard(c):
-            v[c.channel1], v[c.channel2] = v[c.channel2], v[c.channel1]
-        return v
-    else:
-        if is_standard(c):
-            v[c.channel1], v[c.channel2] = v[c.channel2], v[c.channel1]
-        return v
+    i = min_channel(c)
+    j = max_channel(c)
+    if v[i] > v[j]:
+      v[i], v[j] = v[j], v[i]
+    return v
 
 
 def all_comparators(n: int) -> list[Comparator]:
@@ -110,13 +107,12 @@ def to_program(c: Comparator, var: str, aux: str) -> list[str]:
         Does not use the variable aux
 
         >>> to_program(make_comparator(0, 1), "a", "b")
-        ['i = 0', 'j = 1', 'if a[i] > a[j]:', '  a[i], a[j] = a[j], a[i]', \
-'else:', '  a[i], a[j] = a[j], a[i]']
+        ['i = 0', 'j = 1', 'if a[i] > a[j]:', '  a[i], a[j] = a[j], a[i]']
     """
     return [f"i = {min_channel(c)}",
             f"j = {max_channel(c)}",
             f"if {var}[i] > {var}[j]:",
-            f"  {var}[i], {var}[j] = {var}[j], {var}[i]",]
+            f"  {var}[i], {var}[j] = {var}[j], {var}[i]"]
 
     
 
