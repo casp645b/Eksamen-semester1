@@ -116,9 +116,7 @@ def to_program(c: Comparator, var: str, aux: str) -> list[str]:
     return [f"i = {min_channel(c)}",
             f"j = {max_channel(c)}",
             f"if {var}[i] > {var}[j]:",
-            f"  {var}[i], {var}[j] = {var}[j], {var}[i]",
-            f"else:",
-            f"  {var}[i], {var}[j] = {var}[j], {var}[i]"]
+            f"  {var}[i], {var}[j] = {var}[j], {var}[i]",]
 
     
 
