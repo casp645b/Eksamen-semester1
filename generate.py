@@ -10,6 +10,9 @@ def extend(w: list[filter.Filter], n: int) -> list[filter.Filter]:
         Returns a list consisting of the filters
         where a non-redundant comparator is added
 
+        The length of the binary permutations in the binary output 
+        in each filter in w must be equal to n.
+
         >>> extend([filter.make_empty_filter(3)], 3)
         [Filter(netw=Network(comparators=[Comparator(channel1=0, channel2=1)]), \
 binaryOut=[[0, 0, 0], [0, 0, 1], [0, 1, 0], [0, 1, 1], [1, 1, 0], [1, 1, 1]]), \
