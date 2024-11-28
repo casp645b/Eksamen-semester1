@@ -93,8 +93,9 @@ def add(c: comparator.Comparator, f: Filter) -> Filter:
         Filter(netw=Network(comparators=[Comparator(channel1=0, channel2=1)]), \
 binaryOut=[[0, 0, 0], [0, 0, 1], [0, 1, 0], [0, 1, 1], [1, 1, 0], [1, 1, 1]])
     """
-    return  Filter(network.append(c, net(f)), 
-                   network.outputs(temp_net(c), out(f)))
+
+    return Filter(network.append(c, net(f)), 
+                  network.outputs(temp_net(c), out(f)))
 
 
 def is_sorting(f: Filter) -> bool:
