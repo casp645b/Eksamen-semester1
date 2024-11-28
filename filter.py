@@ -79,9 +79,10 @@ def is_redundant(c: comparator.Comparator, f: Filter) -> bool:
 
 def add(c: comparator.Comparator, f: Filter) -> Filter:
     """
-        Updates filter f by adding comparator c
-        i.e. adds a comparator c to the network in f
-        and updates binaryOut in f to reflect this change
+        Returns a copy of the filter f, where the comparator c is added
+        i.e. makes a new instance of the dataclass Filter that contain a copy
+        of the network in the filter f, where the comparator c i added
+        and the binary output, that reflects this network
 
         max_channel of the comparator c
         must be less than the length of each element in f.binaryOut
@@ -92,9 +93,8 @@ def add(c: comparator.Comparator, f: Filter) -> Filter:
         Filter(netw=Network(comparators=[Comparator(channel1=0, channel2=1)]), \
 binaryOut=[[0, 0, 0], [0, 0, 1], [0, 1, 0], [0, 1, 1], [1, 1, 0], [1, 1, 1]])
     """
-    newFilt = Filter(network.append(c, net(f)),
-                     network.outputs(temp_net(c), out(f)))
-    return newFilt
+    return  Filter(network.append(c, net(f)), 
+                   network.outputs(temp_net(c), out(f)))
 
 
 def is_sorting(f: Filter) -> bool:
