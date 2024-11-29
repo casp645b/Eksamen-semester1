@@ -7,13 +7,14 @@ def network_finder(n: int) -> network.Network:
     """
         Finds a sortingnetwork for a list of n channels
 
+        n must be greater than 1
+
         >>> netw = network_finder(4)
         >>> network.is_sorting(netw, 4)
         True
     """
     
     filters = [filt.make_empty_filter(n)]
-
     sortingNetw = []
     while sortingNetw == []:
         filters = generate.extend(filters, n)
@@ -21,19 +22,8 @@ def network_finder(n: int) -> network.Network:
         
         sortingNetw = list(filter(filt.is_sorting, filters))
     return filt.net(sortingNetw[0])
-    
-    
-    filters = [filt.make_empty_filter(n)]
-    
-    while not filt.is_sorting(filters[0]):
-        filters = generate.extend(filters, n)
-        filters = prune.prune(filters, n)
-    return filt.net(filters[0])
 
-    
-    
-    
-    
+
 def interface() -> None:
     """
         Prints the implementation of a found sortingnetwork that sorts a list v
