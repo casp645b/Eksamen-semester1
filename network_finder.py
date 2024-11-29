@@ -38,11 +38,12 @@ def interface() -> None:
     """
         Prints the implementation of a found sortingnetwork that sorts a list v
         with length specified by the input from the user
+
+        The number given in the input function must be an integer greater than 1
     """
     size = int(input("How many inputs should the network sort? "))
 
     sortingNetwork = network_finder(size)
-    print(sortingNetwork)
     print("The found sortingnetwork on " + str(size) + " channels consists of " +
           str(network.size(sortingNetwork)) + " comparators.")
     toWrite = network.to_program(sortingNetwork, "v", "")
