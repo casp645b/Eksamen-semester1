@@ -29,24 +29,6 @@ binaryOut=[[0, 0, 0], [0, 0, 1], [0, 1, 1], [1, 0, 0], [1, 0, 1], [1, 1, 1]])]
                 result = result + [filter.add(c, f)]
     return result
     
-    result = []
-    stdComparators = comparator.std_comparators(n)
-    for f in w:
-        nonRedundants = list(filter(lambda x: not filter.is_redundant(x, f),
-                                    stdComparators))
-        result = result + list(map(lambda x: filter.add(x, f), nonRedundants))
-    return result
-
-    result = []
-    nChannelFilters = list(map(lambda x: filter.Filter(filter.net(x), network.all_outputs(net(x), n), w)))
-    stdComparators = comparator.std_comparators(n)
-    for f in w:
-        for c in stdComparators:
-            if not filter.is_redundant(c, f):
-                result = result + [filter.add(c, f)]
-    return result
-
-
 if __name__ == "__main__":
     import doctest
     doctest.testmod()
