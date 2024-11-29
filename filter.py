@@ -60,7 +60,7 @@ def is_redundant(c: comparator.Comparator, f: Filter) -> bool:
     """
         Returns true if the comparator c is redundant according to f
         Returns false if not
-        i.e. returns true if the length of the binary outputs of f
+        i.e. returns true if the length of the binary output of f
         doesn't change if c is applied to it
 
         max_channel of the comparator c
