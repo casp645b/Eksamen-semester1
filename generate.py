@@ -37,7 +37,7 @@ binaryOut=[[0, 0, 0], [0, 0, 1], [0, 1, 1], [1, 0, 0], [1, 0, 1], [1, 1, 1]])]
         result = result + list(map(lambda x: filter.add(x, f), nonRedundants))
     return result
 
-   result = []
+    result = []
     nChannelFilters = list(map(lambda x: filter.Filter(filter.net(x), network.all_outputs(net(x), n), w)))
     stdComparators = comparator.std_comparators(n)
     for f in w:
