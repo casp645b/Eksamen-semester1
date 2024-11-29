@@ -29,6 +29,7 @@ binaryOut=[[0, 0, 0], [0, 0, 1], [0, 1, 1], [1, 0, 0], [1, 0, 1], [1, 1, 1]])]
                 result = result + [filter.add(c, f)]
     return result
     
+
 if __name__ == "__main__":
     import doctest
     doctest.testmod()

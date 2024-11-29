@@ -5,7 +5,7 @@ import prune
 
 def network_finder(n: int) -> network.Network:
     """
-        Finds a sortingnetwork for n channels/inputs
+        Finds a sortingnetwork for a list of n channels
 
         n must be greater than 1
 
@@ -37,7 +37,8 @@ def interface() -> None:
     print("The found sortingnetwork on " + str(size) + " channels consists of " +
           str(network.size(sortingNetwork)) + " comparators.")
     toWrite = network.to_program(sortingNetwork, "v", "")
-    print("The Python implementation for sorting a list v of size " + str(size) + " is:")
+    print("The Python implementation for sorting a list v of size "
+          + str(size) + " is:")
     for i in toWrite:
         print(i)
 
