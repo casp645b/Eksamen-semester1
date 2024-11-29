@@ -159,18 +159,12 @@ def to_program(net: Network, var: str, aux: str) -> list[str]:
 
         >>> to_program(append(comparator.make_comparator(0, 1), empty_network()),
         ... "a", "b")
-        ['c = make_comparator(0, 1)', 'i = 0', 'j = 1', 'if a[i] < a[j]:', \
-'  if not is_standard(c):', '    a[i], a[j] = a[j], a[i]', 'else:', \
-'  if is_standard(c):', '    a[i], a[j] = a[j], a[i]']
+        ['i = 0', 'j = 1', 'if a[i] > a[j]:', '  a[i], a[j] = a[j], a[i]']
 
         >>> to_program(append(comparator.make_comparator(1, 2),
         ... append(comparator.make_comparator(0, 1), empty_network())), "a", "b")
-        ['c = make_comparator(0, 1)', 'i = 0', 'j = 1', 'if a[i] < a[j]:', \
-'  if not is_standard(c):', '    a[i], a[j] = a[j], a[i]', 'else:', \
-'  if is_standard(c):', '    a[i], a[j] = a[j], a[i]', 'c = make_comparator(1, 2)', \
-'i = 1', 'j = 2', 'if a[i] < a[j]:', '  if not is_standard(c):', \
-'    a[i], a[j] = a[j], a[i]', 'else:', '  if is_standard(c):', \
-'    a[i], a[j] = a[j], a[i]']
+        ['i = 0', 'j = 1', 'if a[i] > a[j]:', '  a[i], a[j] = a[j], a[i]', \
+'i = 1', 'j = 2', 'if a[i] > a[j]:', '  a[i], a[j] = a[j], a[i]']
     """
     return list(functools.reduce(lambda x, y: x+y,
                                  map(lambda x: comparator.to_program(x, var, aux),
