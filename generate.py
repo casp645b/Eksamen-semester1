@@ -6,10 +6,9 @@ import comparator
 def extend(w: list[filter.Filter], n: int) -> list[filter.Filter]:
     """
         Makes a copy of each filter in w
-        and extends each of them by a non-redundant comparator in all possible ways
-        Returns a list consisting of the filters
-        where a non-redundant comparator is added
-
+        and returns a list consisting of the filters, where a non-redundant 
+        comparator is added to the copies in all possible ways
+        
         The length of the binary permutations in the binary output 
         in each filter in w must be equal to n.
 
