@@ -38,7 +38,9 @@ binaryOut=[[0, 0, 0], [0, 0, 1], [0, 1, 1], [1, 0, 0], [1, 0, 1], [1, 1, 1]])]
     return result
 
     result = []
-    nChannelFilters = list(map(lambda x: filter.Filter(filter.net(x), network.all_outputs(net(x), n), w)))
+    nChannelFilters = list(map(lambda x: filter.Filter(filter.net(x),
+                                                       network.all_outputs(net(x),
+                                                                           n), w)))
     stdComparators = comparator.std_comparators(n)
     for f in w:
         for c in stdComparators:
