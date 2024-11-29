@@ -7,6 +7,8 @@ def network_finder(n: int) -> network.Network:
     """
         Finds a sortingnetwork for n channels/inputs
 
+        n must be greater than 1
+
         >>> netw = network_finder(4)
         >>> network.is_sorting(netw, 4)
         True
